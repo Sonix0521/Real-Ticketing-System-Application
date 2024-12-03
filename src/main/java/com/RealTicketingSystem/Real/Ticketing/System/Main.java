@@ -15,6 +15,7 @@ public class Main
     static Vendor vendor = new Vendor();
     static Customer customer = new Customer();
     static TicketPool ticket_pool;
+    static Thread vendor_thread;
     static Validation validation = new Validation();
     static ArrayList<Vendor> vendors_array = new ArrayList<>();
     static ArrayList<Customer> customers_array = new ArrayList<>();
@@ -26,8 +27,8 @@ public class Main
 
         Configuration configuration = new Configuration();
 
-        configuration.Initialize_Configuration_Settings();
-        configuration.Save_Configuration();
+//        configuration.Initialize_Configuration_Settings();
+//        configuration.Save_Configuration();
 
         Configuration fetched_config_info = configuration.Read_Configuration();
 
@@ -35,25 +36,30 @@ public class Main
 
         ticket_pool = new TicketPool(fetched_config_info.getTotal_tickets(), fetched_config_info.getTicket_release_rate(), fetched_config_info.getCustomer_retrieval_rate(), fetched_config_info.getMax_ticket_capacity());
 
-        Main.input.nextLine();
 
-        vendor.Vendor_Details();
+//        vendor.Enter_Vendor_Details();
+//        customer.Customer_Details();
 
-        customer.Customer_Details();
+        vendors_array.add(new Vendor("James" , "01"));
+        vendors_array.add(new Vendor("Luke" , "02"));
+        vendors_array.add(new Vendor("Dan" , "04"));
+        vendors_array.add(new Vendor("Sam" , "03"));
+        vendors_array.add(new Vendor("Kim" , "05"));
 
 
-        for (Vendor v : vendors_array)
+        while (ticket_pool.getTotal_num_of_released_tickets() < ticket_pool.getTotal_tickets())
         {
-            Thread vendor_thread = new Thread(v);
-            vendor_thread.start();
+            for (Vendor v : vendors_array)
+            {
+                if (ticket_pool.getTotal_num_of_released_tickets() == ticket_pool.getTotal_tickets())
+                {
+                    System.out.println("ALL AVAILABLE TICKETS ARE RELEASED.");
+                    break;
+                }
+                vendor_thread = new Thread(v);
+                vendor_thread.start();
+            }
         }
-
-        for (Customer c : customers_array)
-        {
-            Thread vendor_thread = new Thread(c);
-            vendor_thread.start();
-        }
-
     }
 
 }

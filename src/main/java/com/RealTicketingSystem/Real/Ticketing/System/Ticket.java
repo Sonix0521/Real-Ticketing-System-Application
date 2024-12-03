@@ -3,10 +3,10 @@ package com.RealTicketingSystem.Real.Ticketing.System;
 public class Ticket
 {
     private String ticket_ID;
-    private Vendor vendor_ID;
-    private Vendor vendor_name;
+    private String vendor_ID;
+    private String vendor_name;
 
-    public Ticket(String ticket_ID, Vendor vendor_ID, Vendor vendor_name)
+    public Ticket(String ticket_ID, String vendor_ID, String vendor_name)
     {
         this.ticket_ID = ticket_ID;
         this.vendor_ID = vendor_ID;
@@ -17,11 +17,11 @@ public class Ticket
     {
         return ticket_ID;
     }
-    public Vendor getVendor_ID()
+    public String getVendor_ID()
     {
         return vendor_ID;
     }
-    public Vendor getVendor_name()
+    public String getVendor_name()
     {
         return vendor_name;
     }
