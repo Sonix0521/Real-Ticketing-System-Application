@@ -6,7 +6,6 @@ public class Vendor implements Runnable
 {
     private String vendor_name;
     private String vendor_ID;
-    private int total_tickets;
     private int total_num_of_released_tickets;
 
     public Vendor(String vendor_name, String vendor_ID)
@@ -24,20 +23,21 @@ public class Vendor implements Runnable
     @Override
     public void run()
     {
-        try
+        while (!Main.ticket_pool.Check_If_AllTicketsSoldOut())
         {
-            if( total_num_of_released_tickets < getTotal_tickets() )
+            try
             {
                 Main.ticket_pool.Add_Ticket(this);
+                Thread.sleep(2000);
             }
-        }
-        catch (NullPointerException e)
-        {
-            System.out.println("Error : " + e);
-        }
-        catch (InterruptedException e)
-        {
-            throw new RuntimeException(e);
+            catch (NullPointerException e)
+            {
+                System.out.println("Error : " + e);
+            }
+            catch (InterruptedException e)
+            {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -113,10 +113,8 @@ public class Vendor implements Runnable
         return total_num_of_released_tickets;
     }
 
-
     public int getTotal_tickets()
     {
-        this.total_tickets = Main.ticket_pool.getTotal_tickets();
-        return total_tickets;
+        return Main.ticket_pool.getTotal_tickets();
     }
 }

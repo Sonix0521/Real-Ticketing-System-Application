@@ -23,7 +23,22 @@ public class Customer implements Runnable
     @Override
     public void run()
     {
-        Main.ticket_pool.Remove_Ticket();
+        while (!Main.ticket_pool.Check_If_AllTicketsSoldOut())
+        {
+            try
+            {
+                Main.ticket_pool.Purchase_Ticket(this);
+                Thread.sleep(100);
+            }
+            catch (NullPointerException e)
+            {
+                System.out.println("Error : " + e);
+            }
+            catch (InterruptedException e)
+            {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 

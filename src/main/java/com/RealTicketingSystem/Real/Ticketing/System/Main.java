@@ -2,10 +2,7 @@ package com.RealTicketingSystem.Real.Ticketing.System;
 
 import com.google.gson.Gson;
 
-import java.lang.reflect.Executable;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main
@@ -15,7 +12,6 @@ public class Main
     static Vendor vendor = new Vendor();
     static Customer customer = new Customer();
     static TicketPool ticket_pool;
-    static Thread vendor_thread;
     static Validation validation = new Validation();
     static ArrayList<Vendor> vendors_array = new ArrayList<>();
     static ArrayList<Customer> customers_array = new ArrayList<>();
@@ -40,26 +36,42 @@ public class Main
 //        vendor.Enter_Vendor_Details();
 //        customer.Customer_Details();
 
-        vendors_array.add(new Vendor("James" , "01"));
-        vendors_array.add(new Vendor("Luke" , "02"));
-        vendors_array.add(new Vendor("Dan" , "04"));
-        vendors_array.add(new Vendor("Sam" , "03"));
-        vendors_array.add(new Vendor("Kim" , "05"));
+        vendors_array.add(new Vendor("James" , "v01"));
+        vendors_array.add(new Vendor("Luke" , "v02"));
+        vendors_array.add(new Vendor("Dan" , "v04"));
+
+        customers_array.add(new Customer("Ben" , "c01"));
+        customers_array.add(new Customer("Olivia" , "c02"));
+        customers_array.add(new Customer("Marcus" , "c03"));
+        customers_array.add(new Customer("Liam" , "c04"));
+        customers_array.add(new Customer("John" , "c05"));
+        customers_array.add(new Customer("James" , "c06"));
+        customers_array.add(new Customer("William" , "c07"));
+        customers_array.add(new Customer("Jacob" , "c08"));
+        customers_array.add(new Customer("Olivia" , "c09"));
+        customers_array.add(new Customer("Harper" , "c10"));
+        customers_array.add(new Customer("Ian" , "c11"));
+        customers_array.add(new Customer("Kevin" , "c12"));
+        customers_array.add(new Customer("Mark" , "c13"));
+        customers_array.add(new Customer("Daniel" , "c14"));
+        customers_array.add(new Customer("Jeo" , "c15"));
 
 
-        while (ticket_pool.getTotal_num_of_released_tickets() < ticket_pool.getTotal_tickets())
+        Thread vendor_thread;
+        Thread customer_thread;
+
+        for (Vendor vendor : vendors_array)
         {
-            for (Vendor v : vendors_array)
-            {
-                if (ticket_pool.getTotal_num_of_released_tickets() == ticket_pool.getTotal_tickets())
-                {
-                    System.out.println("ALL AVAILABLE TICKETS ARE RELEASED.");
-                    break;
-                }
-                vendor_thread = new Thread(v);
-                vendor_thread.start();
-            }
+            vendor_thread = new Thread(vendor);
+            vendor_thread.start();
         }
+
+        for (Customer customer : customers_array)
+        {
+            customer_thread = new Thread(customer);
+            customer_thread.start();
+        }
+
     }
 
 }
