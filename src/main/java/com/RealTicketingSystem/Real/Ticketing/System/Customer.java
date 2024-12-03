@@ -6,7 +6,7 @@ public class Customer implements Runnable
 {
     private String customer_name;
     private String customer_ID;
-    private int customer_retrieval_rate;
+
 
     public Customer(String customer_name, String customer_ID)
     {
@@ -48,7 +48,7 @@ public class Customer implements Runnable
                       | Customer Successfully Added. |
                       ------------------------------""");
 
-            String continue_adding_customer = Main.validation.Validate_Iterative_Condition("""
+            String continue_adding_customer = Main.validation.Validate_AddUser_Iteration("""
                 \n    Add another customer
                       - Yes (y)
                       - No  (n)
@@ -80,7 +80,6 @@ public class Customer implements Runnable
         return  "\tCustomer {" +
                 " customer_name : " + customer_name +
                 " | customer_ID : " + customer_ID +
-                " | customer_retrieval_rate : " + customer_retrieval_rate +
                 " }";
     }
 
@@ -92,8 +91,5 @@ public class Customer implements Runnable
     {
         return customer_ID;
     }
-    public int getCustomer_retrieval_rate()
-    {
-        return customer_retrieval_rate;
-    }
+
 }

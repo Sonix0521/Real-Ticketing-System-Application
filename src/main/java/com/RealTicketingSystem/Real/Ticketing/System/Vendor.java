@@ -6,9 +6,8 @@ public class Vendor implements Runnable
 {
     private String vendor_name;
     private String vendor_ID;
-    private int ticket_release_rate;
-
-
+    private int total_tickets;
+    private int total_num_of_released_tickets;
 
     public Vendor(String vendor_name, String vendor_ID)
     {
@@ -25,12 +24,26 @@ public class Vendor implements Runnable
     @Override
     public void run()
     {
-        Main.ticket_pool.Add_Ticket();
+        try
+        {
+            if( total_num_of_released_tickets < getTotal_tickets() )
+            {
+                Main.ticket_pool.Add_Ticket(this);
+            }
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Error : " + e);
+        }
+        catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
 
 
-    public void Vendor_Details()
+    public void Enter_Vendor_Details()
     {
         boolean iterative_condition = true;
         int total_vendors = 1;
@@ -50,7 +63,7 @@ public class Vendor implements Runnable
                       | Vendor Successfully Added. |
                       ------------------------------""");
 
-            String continue_adding_vendor = Main.validation.Validate_Iterative_Condition("""
+            String continue_adding_vendor = Main.validation.Validate_AddUser_Iteration("""
                 \n    Add another vendor
                       - Yes (y)
                       - No  (n)
@@ -71,7 +84,6 @@ public class Vendor implements Runnable
                 total_vendors++;
                 System.out.println();
             }
-
         }
     }
 
@@ -82,7 +94,6 @@ public class Vendor implements Runnable
         return  "\tVendor {" +
                 " vendor_name : " + vendor_name +
                 " | vendor_ID : " + vendor_ID +
-                " | ticket_release_rate : " + ticket_release_rate +
                 " }";
     }
 
@@ -94,9 +105,18 @@ public class Vendor implements Runnable
     {
         return vendor_ID;
     }
-    public int getTicket_release_rate()
-    {
-        return ticket_release_rate;
+
+    public void setTotal_num_of_released_tickets(int total_num_of_released_tickets) {
+        this.total_num_of_released_tickets = total_num_of_released_tickets;
+    }
+    public int getTotal_num_of_released_tickets() {
+        return total_num_of_released_tickets;
     }
 
+
+    public int getTotal_tickets()
+    {
+        this.total_tickets = Main.ticket_pool.getTotal_tickets();
+        return total_tickets;
+    }
 }

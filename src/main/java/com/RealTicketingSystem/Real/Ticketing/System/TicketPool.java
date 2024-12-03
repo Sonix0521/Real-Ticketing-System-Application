@@ -1,17 +1,21 @@
 package com.RealTicketingSystem.Real.Ticketing.System;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class TicketPool
 {
-    private int total_tickets;
-    private int ticket_release_rate;
-    private int customer_retrieval_rate;
-    private int max_ticket_capacity;
+    private final int total_tickets;
+    private final int ticket_release_rate;
+    private final int customer_retrieval_rate;
+    private final int max_ticket_capacity;
+    private int total_num_of_released_tickets;
+    private String ticket_ID;
 
-
-    static ArrayList<Integer> ticket_pool_array = new ArrayList<Integer>();
-
+    static List<Ticket> ticket_pool_array = Collections.synchronizedList(new ArrayList<Ticket>());
 
 
     public TicketPool(int total_tickets, int ticket_release_rate, int customer_retrieval_rate, int max_ticket_capacity)
@@ -23,26 +27,61 @@ public class TicketPool
     }
 
 
-    public void Add_Ticket()
+    public synchronized void Add_Ticket(Vendor vendor) throws InterruptedException
     {
-        for ( int i = 0 ; i < total_tickets ; i++ )
+        if ( total_num_of_released_tickets < total_tickets )
         {
-            ticket_pool_array.add(i);
+            for ( int i = 1 ; i <= ticket_release_rate ; i++ )
+            {
+                if ( total_num_of_released_tickets < total_tickets )
+                {
+                    vendor.setTotal_num_of_released_tickets(total_num_of_released_tickets);
+
+                    ticket_ID = vendor.getVendor_ID() + "-" + vendor.getVendor_name() + "-" + i;
+                    Ticket ticket = new Ticket(ticket_ID, vendor.getVendor_ID(), vendor.getVendor_name());
+                    ticket_pool_array.add(ticket);
+                    total_num_of_released_tickets++;
+                    ThreadSleep();
+                }
+            }
+            System.out.println("Vendor : " + vendor.getVendor_name() + vendor.getVendor_ID() + " released " + ticket_release_rate + " tickets. Tickets : " + ticket_ID);
+            System.out.println("Total released tickets : " + total_num_of_released_tickets);
         }
     }
 
 
-    public void Remove_Ticket()
+    public synchronized void Remove_Ticket()
     {
-        for ( int i = 0 ; i < total_tickets ; i++ )
+        for ( int i = 1 ; i <= total_tickets ; i++ )
         {
-            ticket_pool_array.removeFirst();
+            if(!ticket_pool_array.isEmpty())
+            {
+                ticket_pool_array.removeFirst();
+                System.out.println("");
+            }
         }
     }
 
 
+    public synchronized void ThreadSleep() throws InterruptedException
+    {
+        Thread.sleep(10);
+    }
 
-    public int getTotal_tickets()
+
+    @Override
+    public String toString()
+    {
+        return " TicketPool {" +
+                " total_tickets : " + total_tickets +
+                " | ticket_release_rate : " + ticket_release_rate +
+                " | customer_retrieval_rate : " + customer_retrieval_rate +
+                " | max_ticket_capacity : " + max_ticket_capacity +
+                " | total_num_of_released_tickets : " + total_num_of_released_tickets +
+                " }";
+    }
+
+    public synchronized int getTotal_tickets()
     {
         return total_tickets;
     }
@@ -57,5 +96,9 @@ public class TicketPool
     public int getMax_ticket_capacity()
     {
         return max_ticket_capacity;
+    }
+    public synchronized int getTotal_num_of_released_tickets()
+    {
+        return total_num_of_released_tickets;
     }
 }

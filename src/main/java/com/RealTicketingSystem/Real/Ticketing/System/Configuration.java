@@ -1,7 +1,5 @@
 package com.RealTicketingSystem.Real.Ticketing.System;
 
-import com.google.gson.Gson;
-
 import java.io.*;
 
 
@@ -66,7 +64,14 @@ public class Configuration
               --------------------------------------
             """);
 
-            return Main.gson.fromJson(reader, Configuration.class);
+            Configuration loaded_configuration = Main.gson.fromJson(reader, Configuration.class);
+
+            this.total_tickets = loaded_configuration.getTotal_tickets();
+            this.ticket_release_rate = loaded_configuration.getTicket_release_rate();
+            this.customer_retrieval_rate = loaded_configuration.getCustomer_retrieval_rate();
+            this.max_ticket_capacity = loaded_configuration.getMax_ticket_capacity();
+
+            return loaded_configuration;
         }
         catch (IOException e)
         {

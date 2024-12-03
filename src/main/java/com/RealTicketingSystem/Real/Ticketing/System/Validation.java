@@ -1,7 +1,5 @@
 package com.RealTicketingSystem.Real.Ticketing.System;
 
-import java.util.Objects;
-
 public class Validation
 {
 
@@ -61,7 +59,7 @@ public class Validation
         }
     }
 
-    public String Validate_Iterative_Condition(String prompt_iteration_statement)
+    public String Validate_AddUser_Iteration(String prompt_iteration_statement)
     {
         System.out.print(prompt_iteration_statement);
 
