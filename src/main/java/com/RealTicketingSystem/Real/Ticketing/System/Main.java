@@ -23,8 +23,8 @@ public class Main
 
         Configuration configuration = new Configuration();
 
-//        configuration.Initialize_Configuration_Settings();
-//        configuration.Save_Configuration();
+        configuration.Initialize_Configuration_Settings();
+        configuration.Save_Configuration();
 
         Configuration fetched_config_info = configuration.Read_Configuration();
 
