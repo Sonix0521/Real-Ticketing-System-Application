@@ -14,15 +14,13 @@ public class Configuration
 
     public void Initialize_Configuration_Settings()
     {
-        total_tickets = Main.validation.Validate_Configuration_Settings("  ■ Enter total number of tickets : ");
+        total_tickets = Main.validation.Validate_Configuration_Settings("\t ■ Enter total number of tickets : ");
 
-        ticket_release_rate = Main.validation.Validate_Configuration_Settings("  ■ Enter ticket release rate     : ");
+        ticket_release_rate = Main.validation.Validate_Configuration_Settings("\t ■ Enter ticket release rate     : ");
 
-        customer_retrieval_rate = Main.validation.Validate_Configuration_Settings("  ■ Enter customer retrieval rate : ");
+        customer_retrieval_rate = Main.validation.Validate_Configuration_Settings("\t ■ Enter customer retrieval rate : ");
 
-        max_ticket_capacity = Main.validation.Validate_Configuration_Settings("  ■ Enter maximum ticket capacity : ");
-
-        System.out.println();
+        max_ticket_capacity = Main.validation.Validate_Configuration_Settings("\t ■ Enter maximum ticket capacity : ");
     }
 
 
@@ -37,11 +35,7 @@ public class Configuration
             writer.write(json);
             writer.close();
 
-            System.out.println(""" 
-              -------------------------------------
-              | Configuration Successfully Saved. |
-              -------------------------------------
-            """);
+            System.out.println("\n\t   ● Configuration Successfully Saved.\n");
         }
         catch (IOException e)
         {
@@ -58,11 +52,7 @@ public class Configuration
         {
             FileReader reader = new FileReader("Configuration.json");
 
-            System.out.println("""
-              --------------------------------------
-              | Configuration Successfully Loaded. |
-              --------------------------------------
-            """);
+            System.out.println("\t   ● Configuration Successfully Loaded.\n");
 
             Configuration loaded_configuration = Main.gson.fromJson(reader, Configuration.class);
 
@@ -75,7 +65,7 @@ public class Configuration
         }
         catch (IOException e)
         {
-            System.out.println("\t ○ ERROR : Unable to load configuration.");
+            System.out.println("\t\t ○ ERROR : Unable to load configuration.\n");
             throw new RuntimeException(e);
         }
     }
@@ -85,18 +75,18 @@ public class Configuration
     public void Display_Loaded_Configuration()
     {
         System.out.printf("""
-                %2s-----------------------------------
-                %2s|     CONFIGURATION SETTINGS      |
-                %2s-----------------------------------
-                ""","","","");
+                \t %2s-----------------------------------
+                \t %2s|     CONFIGURATION SETTINGS      |
+                \t %2s-----------------------------------
+                \t""","","","");
 
         System.out.printf(
-                "  | Total number of tickets  = %-4d |%n  | Ticket release rate      = %-4d |%n  | Ticket retrieval rate    = %-4d |%n  | Maximum ticket capacity  = %-4d |%n",
+                "   | Total number of tickets  = %-4d |%n\t   | Ticket release rate      = %-4d |%n\t   | Ticket retrieval rate    = %-4d |%n\t   | Maximum ticket capacity  = %-4d |%n",
                 getTotal_tickets() ,
                 getTicket_release_rate() ,
                 getCustomer_retrieval_rate() ,
                 getMax_ticket_capacity());
-        System.out.println("  -----------------------------------\n");
+        System.out.println("\t   -----------------------------------\n");
     }
 
 

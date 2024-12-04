@@ -43,40 +43,36 @@ public class Vendor implements Runnable
 
 
 
-    public void Enter_Vendor_Details()
+    public void Initialize_Vendor_Details()
     {
+        System.out.println("  Initialize vendor details.\n");
+
         boolean iterative_condition = true;
         int total_vendors = 1;
 
+        Main.input.nextLine();
+
         while(iterative_condition)
         {
-            String vendor_name = Main.validation.Validate_name("  ■ Enter vendor name : ");
+            String vendor_name = Main.validation.Validate_name("\t ■ Enter vendor name : ");
 
-            System.out.print("  ■ Enter vendor ID   : ");
+            System.out.print("\t ■ Enter vendor ID   : ");
             String vendor_ID = Main.input.nextLine();
 
             Vendor vendor = new Vendor(vendor_name, vendor_ID);
             Main.vendors_array.add(vendor);
 
-            System.out.println("""
-                    \n  ------------------------------
-                      | Vendor Successfully Added. |
-                      ------------------------------""");
+            System.out.print("\n\t\t ● Vendor : " + vendor_name + "-" + vendor_ID + " | Successfully Added.\n\n");
 
             String continue_adding_vendor = Main.validation.Validate_AddUser_Iteration("""
-                \n    Add another vendor
-                      - Yes (y)
-                      - No  (n)
+                \t   Add another vendor
+                \t     - Yes (y)
+                \t     - No  (n)
                 """);
 
             if (Objects.equals(continue_adding_vendor, "NO") || Objects.equals(continue_adding_vendor, "N"))
             {
-                System.out.println("""
-                        \n  -----------------------------------
-                          | All Vendors Successfully Saved. |""");
-                System.out.printf("  | Total Vendors : %-16d|%n" , total_vendors);
-                System.out.println("  -----------------------------------\n");
-
+                System.out.println("\n\t   ● Total vendors : " + total_vendors + " | All successfully added.");
                 iterative_condition = false;
             }
             else
@@ -104,17 +100,5 @@ public class Vendor implements Runnable
     public String getVendor_ID()
     {
         return vendor_ID;
-    }
-
-    public void setTotal_num_of_released_tickets(int total_num_of_released_tickets) {
-        this.total_num_of_released_tickets = total_num_of_released_tickets;
-    }
-    public int getTotal_num_of_released_tickets() {
-        return total_num_of_released_tickets;
-    }
-
-    public int getTotal_tickets()
-    {
-        return Main.ticket_pool.getTotal_tickets();
     }
 }

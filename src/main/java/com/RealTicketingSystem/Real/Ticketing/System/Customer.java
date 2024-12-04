@@ -43,39 +43,34 @@ public class Customer implements Runnable
 
 
 
-    public void Customer_Details()
+    public void Initialize_Customer_Details()
     {
+        System.out.println("\n  Initialize customer details.\n");
+
         boolean iterative_condition = true;
         int total_customers = 1;
 
         while(iterative_condition)
         {
-            String customer_name = Main.validation.Validate_name("  ■ Enter customer name : ");
+            String customer_name = Main.validation.Validate_name("\t ■ Enter customer name : ");
 
-            System.out.print("  ■ Enter customer ID   : ");
+            System.out.print("\t ■ Enter customer ID   : ");
             String customer_ID = Main.input.nextLine();
 
             Customer customer = new Customer(customer_name, customer_ID);
             Main.customers_array.add(customer);
 
-            System.out.println("""
-                    \n  ------------------------------
-                      | Customer Successfully Added. |
-                      ------------------------------""");
+            System.out.println("\n\t\t ● Customer : " + customer_name + "-" + customer_ID + " | Successfully added.\n");
 
             String continue_adding_customer = Main.validation.Validate_AddUser_Iteration("""
-                \n    Add another customer
-                      - Yes (y)
-                      - No  (n)
+                \t   Add another customer
+                \t     - Yes (y)
+                \t     - No  (n)
                 """);
 
             if (Objects.equals(continue_adding_customer, "NO") || Objects.equals(continue_adding_customer, "N"))
             {
-                System.out.println("""
-                        \n  -------------------------------------
-                          | All Customers Successfully Saved. |""");
-                System.out.printf("  | Total Customers : %-16d|%n" , total_customers);
-                System.out.println("  -------------------------------------\n");
+                System.out.println("\n\t   ● Total Customers : " + total_customers + " | All successfully added.\n");
 
                 iterative_condition = false;
             }
