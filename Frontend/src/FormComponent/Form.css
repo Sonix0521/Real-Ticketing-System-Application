@@ -2,13 +2,25 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem; /* Increased gap between form groups */
   width: 100%;
   max-width: 500px;
   background: #ffffff;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Title styling */
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #030412;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #646cff;
+  padding-bottom: 1.5rem;
 }
 
 /* Form group (each label + input pair) styles */
@@ -16,6 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 }
 
 /* Label styling */
@@ -23,18 +36,23 @@ label {
   font-size: 1rem;
   font-weight: 600;
   color: #030412;
+  margin-left: 0; /* Ensure no extra margin on the left */
+  margin-bottom: 0.25rem; /* Space between label and input */
+  text-align: left; /* Align text to the left */
 }
 
 /* Input field styles */
 input {
-  padding: 0.75rem;
+  padding: 0.75rem; /* Adds space inside the input field */
   font-size: 1rem;
   border: 1px solid #ccc;
   background-color: #f0f8ff;
   color: black;
   border-radius: 4px;
   outline: none;
+  width: 100%; /* Ensure input fields take up full width */
   transition: border-color 0.3s;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
 
 /* Input field focus styles */
@@ -70,4 +88,11 @@ input[type="number"]::-moz-appearance {
 /* Button hover effect */
 .form-button:hover {
   background-color: #535bf2;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
