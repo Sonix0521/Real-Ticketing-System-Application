@@ -44,8 +44,23 @@ public class Main
 
         ticket_pool = new TicketPool(fetched_config_info.getTotal_tickets(), fetched_config_info.getTicket_release_rate(), fetched_config_info.getCustomer_retrieval_rate(), fetched_config_info.getMax_ticket_capacity());
 
-        Initialize_Total_CustomersAndVendors(4, 10);
-        StartThreads();
+        Initialize_Total_CustomersAndVendors(5, 10);
+//        StartThreads();
+
+        Thread vendor_thread;
+        Thread customer_thread;
+
+        for (Vendor vendor : vendors_array)
+        {
+            vendor_thread = new Thread(vendor);
+            vendor_thread.start();
+        }
+
+        for (Customer customer : customers_array)
+        {
+            customer_thread = new Thread(customer);
+            customer_thread.start();
+        }
     }
 
 
@@ -71,22 +86,22 @@ public class Main
 
 
 
-    public static void StartThreads()
-    {
-        Thread vendor_thread;
-        Thread customer_thread;
-
-        for (Vendor vendor : vendors_array)
-        {
-            vendor_thread = new Thread(vendor);
-            vendor_thread.start();
-        }
-
-        for (Customer customer : customers_array)
-        {
-            customer_thread = new Thread(customer);
-            customer_thread.start();
-        }
-    }
+//    public static void StartThreads()
+//    {
+//        Thread vendor_thread;
+//        Thread customer_thread;
+//
+//        for (Vendor vendor : vendors_array)
+//        {
+//            vendor_thread = new Thread(vendor);
+//            vendor_thread.start();
+//        }
+//
+//        for (Customer customer : customers_array)
+//        {
+//            customer_thread = new Thread(customer);
+//            customer_thread.start();
+//        }
+//    }
 
 }

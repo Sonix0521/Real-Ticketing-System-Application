@@ -14,6 +14,7 @@ public class TicketPool
     private int total_num_of_released_tickets;
     private int total_num_of_purchased_tickets;
     private String ticket_ID;
+    private boolean all_tickets_released = false;
 
 
 
@@ -29,9 +30,16 @@ public class TicketPool
 
     public synchronized void Add_Ticket(Vendor vendor) throws InterruptedException
     {
-        if ( total_num_of_released_tickets >= total_tickets )
+
+        if ( total_num_of_released_tickets >= total_tickets && !all_tickets_released )
         {
             System.out.println("ALL TICKETS HAVE BEEN RELEASED BY VENDORS!!!");
+            all_tickets_released = true;
+            return;
+        }
+
+        if ( total_num_of_released_tickets >= total_tickets )
+        {
             return;
         }
 
