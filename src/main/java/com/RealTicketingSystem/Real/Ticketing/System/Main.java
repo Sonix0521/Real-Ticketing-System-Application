@@ -24,10 +24,11 @@ public class Main
         System.out.println(ColorsUtil.CYAN + """
         --------------------------------------------------------
         | ********** | REAL-TIME TICKETING SYSTEM | ********** |
-        --------------------------------------------------------
-        """ + ColorsUtil.RESET);
+        --------------------------------------------------------""" + ColorsUtil.RESET);
 
-        System.out.println(ColorsUtil.BLUE + "\n\t   INITIATING SYSTEM...\n" + ColorsUtil.RESET);
+        System.out.println(ColorsUtil.BLUE + "\n\t   INITIATING SYSTEM..." + ColorsUtil.RESET);
+
+        System.out.println("\n  Please setup configuration requirements.\n");
 
         configuration.Initialize_Configuration_Parameters();
         configuration.Save_Configuration_Parameters();

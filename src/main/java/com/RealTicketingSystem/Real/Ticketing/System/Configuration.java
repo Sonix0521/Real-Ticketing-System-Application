@@ -15,13 +15,13 @@ public class Configuration
 
     public void Initialize_Configuration_Parameters()
     {
-        total_tickets = Main.validation.Validate_Configuration_Settings("  ■ Enter total number of tickets : ");
+        total_tickets = Main.validation.Validate_Configuration_Settings("\t ■ Enter total number of tickets : ");
 
-        ticket_release_rate = Main.validation.Validate_Configuration_Settings("  ■ Enter ticket release rate     : ");
+        ticket_release_rate = Main.validation.Validate_Configuration_Settings("\t ■ Enter ticket release rate     : ");
 
-        customer_retrieval_rate = Main.validation.Validate_Configuration_Settings("  ■ Enter customer retrieval rate : ");
+        customer_retrieval_rate = Main.validation.Validate_Configuration_Settings("\t ■ Enter customer retrieval rate : ");
 
-        max_ticket_capacity = Main.validation.Validate_Configuration_Settings("  ■ Enter maximum ticket capacity : ");
+        max_ticket_capacity = Main.validation.Validate_Configuration_Settings("\t ■ Enter maximum ticket capacity : ");
 
         System.out.println();
     }
