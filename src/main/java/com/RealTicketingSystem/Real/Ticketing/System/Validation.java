@@ -70,33 +70,4 @@ public class Validation
         }
     }
 
-
-
-    protected String Validate_SystemInitiationMenuInputs()
-    {
-        while (true)
-        {
-            System.out.println("""
-                  Welcome. Please Select an option to launch CLI
-                \t   ---------------------------
-                \t   | INITIATE SYSTEM = START |
-                \t   | EXIT SYSTEM     = EXIT  |
-                \t   ---------------------------""");
-
-            System.out.print("  Enter selected option : ");
-            String system_initiation_option = Main.input.nextLine();
-            system_initiation_option = system_initiation_option.toUpperCase();
-
-            if (system_initiation_option.equalsIgnoreCase("START") || system_initiation_option.equalsIgnoreCase("EXIT"))
-            {
-                return system_initiation_option;
-            }
-            else
-            {
-                System.out.println(ColorsUtil.RED + "\n\t\t ○ INVALID OPTION : Enter 'START' or 'EXIT'\n" + ColorsUtil.RESET);
-            }
-        }
-    }
-
-
 }
