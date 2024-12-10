@@ -21,21 +21,27 @@ public class Validation
 
                 if (config_value > 0)
                 {
+                    if (configuration_statement.equalsIgnoreCase("\t ■ Enter total number of tickets : ") && config_value == 1)
+                    {
+                        System.out.println(Main.YELLOW + "\t\t ○ GUIDELINE : Total tickets should be larger than 1." + Main.RESET);
+                        Main.input.nextLine();
+                        continue;
+                    }
                     if (configuration_statement.equalsIgnoreCase("\t ■ Enter maximum ticket capacity : ") && config_value < Main.configuration.getTotal_tickets() )
                     {
-                        System.out.println("\t\t ○ GUIDELINE : Total tickets should not exceed maximum ticket capacity.");
+                        System.out.println(Main.YELLOW + "\t\t ○ GUIDELINE : Total tickets should not exceed maximum ticket capacity." + Main.RESET);
                         Main.input.nextLine();
                         continue;
                     }
                     if ( configuration_statement.equalsIgnoreCase("\t ■ Enter ticket release rate     : ") && config_value > Main.configuration.getTotal_tickets()/2 )
                     {
-                        System.out.println("\t\t ○ GUIDELINE : Vendor release rate must be at least 50% less than total tickets.");
+                        System.out.println(Main.YELLOW + "\t\t ○ GUIDELINE : Vendor release rate must be at least 50% less than total tickets." + Main.RESET);
                         Main.input.nextLine();
                         continue;
                     }
                     if ( configuration_statement.equalsIgnoreCase("\t ■ Enter customer retrieval rate : ") && config_value > Main.configuration.getTotal_tickets()/2 )
                     {
-                        System.out.println("\t\t ○ GUIDELINE : Customer retrieval rate must be at least 50% less than total tickets.");
+                        System.out.println(Main.YELLOW + "\t\t ○ GUIDELINE : Customer retrieval rate must be at least 50% less than total tickets." + Main.RESET);
                         Main.input.nextLine();
                         continue;
                     }
@@ -43,17 +49,17 @@ public class Validation
                 }
                 else
                 {
-                    System.out.println("\t\t ○ INVALID INPUT : Please enter a positive value.");
+                    System.out.println(Main.RED + "\t\t ○ INVALID INPUT : Please enter a positive value." + Main.RESET);
                 }
             }
             else if (Main.input.hasNextDouble())
             {
-                System.out.println("\t\t ○ INVALID INPUT : Integer numerics are required.");
+                System.out.println(Main.RED + "\t\t ○ INVALID INPUT : Integer numerics are required." + Main.RESET);
                 Main.input.next();
             }
             else
             {
-                System.out.println("\t\t ○ INVALID INPUT : Please enter a numerical value.");
+                System.out.println(Main.RED + "\t\t ○ INVALID INPUT : Please enter a numerical value." + Main.RESET);
                 Main.input.next();
             }
         }
@@ -75,7 +81,7 @@ public class Validation
             }
             else
             {
-                System.out.println("\t\t ○ INVALID INPUT : Non-alphabetical characters aren't allowed for name.");
+                System.out.println(Main.RED + "\t\t ○ INVALID INPUT : Non-alphabetical characters aren't allowed for name." + Main.RESET);
             }
         }
     }
@@ -98,7 +104,7 @@ public class Validation
                     return continue_adding_vendor;
 
                 default:
-                    System.out.println("\t\t ○ INVALID INPUT : Enter Y or N.");
+                    System.out.println(Main.RED + "\t\t ○ INVALID INPUT : Enter Y or N." + Main.RESET);
                     break;
             }
 
@@ -123,12 +129,12 @@ public class Validation
                 }
                 else
                 {
-                    System.out.println("\t\t ○ GUIDELINE : Number of " + user_type + " should at least be 01.");
+                    System.out.println(Main.YELLOW + "\t\t ○ GUIDELINE : Number of " + user_type + " should at least be 01." + Main.RESET);
                 }
             }
             catch (InputMismatchException InvalidInputError)
             {
-                System.out.println("\t\t ○ ERROR : Please enter a numerical value.");
+                System.out.println(Main.RED + "\t\t ○ ERROR : Please enter a numerical value." + Main.RESET);
                 Main.input.nextLine();
             }
         }
@@ -159,13 +165,13 @@ public class Validation
                 }
                 else
                 {
-                    System.out.println("\n\t\t ○ INVALID OPTION : Please select one out of the given.\n");
+                    System.out.println(Main.RED + "\n\t\t ○ INVALID OPTION : Please select one out of the given.\n" + Main.RESET);
                     Main.input.nextLine();
                 }
             }
             catch (InputMismatchException InvalidInputError)
             {
-                System.out.println("\n\t\t ○ INVALID INPUT : Please enter a numerical value.\n");
+                System.out.println(Main.RED + "\n\t\t ○ INVALID INPUT : Please enter a numerical value.\n" + Main.RESET);
                 Main.input.nextLine();
             }
 
@@ -196,7 +202,7 @@ public class Validation
             }
             else
             {
-                System.out.println("\n\t\t ○ INVALID OPTION : Enter 'START' or 'EXIT'\n");
+                System.out.println(Main.RED + "\n\t\t ○ INVALID OPTION : Enter 'START' or 'EXIT'\n" + Main.RESET);
             }
         }
     }

@@ -60,7 +60,7 @@ public class Customer implements Runnable
             Customer customer = new Customer(customer_name, customer_ID);
             Main.customers_array.add(customer);
 
-            System.out.println("\n\t\t ● Customer : " + customer_name + "-" + customer_ID + " | Successfully added.\n");
+            System.out.println(Main.GREEN + "\n\t\t ● Customer : " + customer_name + "-" + customer_ID + " | Successfully added.\n" + Main.RESET);
 
             String continue_adding_customer = Main.validation.Validate_AddUser_Iteration("""
                 \t   Add another customer
@@ -70,7 +70,7 @@ public class Customer implements Runnable
 
             if (Objects.equals(continue_adding_customer, "NO") || Objects.equals(continue_adding_customer, "N"))
             {
-                System.out.println("\n\t   ● Total Customers : " + total_customers + " | All successfully added.\n");
+                System.out.println(Main.GREEN + "\n\t   ● Total Customers : " + total_customers + " | All successfully added.\n" + Main.RESET);
 
                 iterative_condition = false;
             }

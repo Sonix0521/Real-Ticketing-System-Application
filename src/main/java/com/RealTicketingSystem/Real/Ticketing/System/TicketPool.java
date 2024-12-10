@@ -13,6 +13,7 @@ public class TicketPool
     private int total_num_of_released_tickets;
     private int total_num_of_purchased_tickets;
     private String ticket_ID;
+    private boolean all_tickets_released = false;
 
     public TicketPool(int total_tickets, int ticket_release_rate, int customer_retrieval_rate, int max_ticket_capacity)
     {
@@ -25,9 +26,16 @@ public class TicketPool
 
     public synchronized void Add_Ticket(Vendor vendor) throws InterruptedException
     {
-        if ( total_num_of_released_tickets >= total_tickets )
+
+        if ( total_num_of_released_tickets >= total_tickets && !all_tickets_released )
         {
             System.out.println("ALL TICKETS HAVE BEEN RELEASED BY VENDORS!!!");
+            all_tickets_released = true;
+            return;
+        }
+
+        if ( total_num_of_released_tickets >= total_tickets )
+        {
             return;
         }
 
@@ -42,11 +50,20 @@ public class TicketPool
         }
         System.out.println("\nVendor : " + vendor.getVendor_name() + vendor.getVendor_ID() + " released " + ticket_release_rate + " tickets. Tickets : " + ticket_ID);
         System.out.println("Total released tickets : " + total_num_of_released_tickets + " | Available tickets for purchase : " + Main.ticket_pool_array.size() + "\n");
+        notifyAll();
+        Thread.sleep(3000);
     }
 
 
     public synchronized void Purchase_Ticket(Customer customer) throws InterruptedException
     {
+//        while (Main.ticket_pool_array.isEmpty())
+//        {
+//            System.out.println("No tickets available. Customer " + customer.getCustomer_name() + " is waiting......");
+//            wait();
+//            return;
+//        }
+
         if(Main.ticket_pool_array.isEmpty()) return;
 
         int definite_num_of_tickets_to_be_purchased = (int) ( ( Math.random() * customer_retrieval_rate ) + 1);
@@ -58,11 +75,12 @@ public class TicketPool
             total_num_of_purchased_tickets++;
         }
         System.out.println("Customer : " + customer.getCustomer_name() + customer.getCustomer_ID() + " purchased " + definite_num_of_tickets_to_be_purchased + " tickets. | Available tickets for purchase : " + Main.ticket_pool_array.size() + " | Total purchased tickets : " + total_num_of_purchased_tickets);
+        notifyAll();
+        Thread.sleep(100);
 
         if (Check_If_AllTicketsSoldOut())
         {
             System.out.println("ALL AVAILABLE TICKETS ARE SOLD OUT!!!");
-
         }
     }
 
@@ -82,10 +100,5 @@ public class TicketPool
                 " | max_ticket_capacity : " + max_ticket_capacity +
                 " | total_num_of_released_tickets : " + total_num_of_released_tickets +
                 " }";
-    }
-
-    public synchronized int getTotal_tickets()
-    {
-        return total_tickets;
     }
 }

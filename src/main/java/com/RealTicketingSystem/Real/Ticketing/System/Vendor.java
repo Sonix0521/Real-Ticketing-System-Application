@@ -28,7 +28,7 @@ public class Vendor implements Runnable
             try
             {
                 Main.ticket_pool.Add_Ticket(this);
-                Thread.sleep(2000);
+                Thread.sleep(100);
             }
             catch (NullPointerException e)
             {
@@ -62,7 +62,7 @@ public class Vendor implements Runnable
             Vendor vendor = new Vendor(vendor_name, vendor_ID);
             Main.vendors_array.add(vendor);
 
-            System.out.print("\n\t\t ● Vendor : " + vendor_name + "-" + vendor_ID + " | Successfully Added.\n\n");
+            System.out.print(Main.GREEN + "\n\t\t ● Vendor : " + vendor_name + "-" + vendor_ID + " | Successfully Added.\n\n" + Main.RESET);
 
             String continue_adding_vendor = Main.validation.Validate_AddUser_Iteration("""
                 \t   Add another vendor
@@ -72,7 +72,7 @@ public class Vendor implements Runnable
 
             if (Objects.equals(continue_adding_vendor, "NO") || Objects.equals(continue_adding_vendor, "N"))
             {
-                System.out.println("\n\t   ● Total vendors : " + total_vendors + " | All successfully added.");
+                System.out.println(Main.GREEN + "\n\t   ● Total vendors : " + total_vendors + " | All successfully added." + Main.RESET);
                 iterative_condition = false;
             }
             else

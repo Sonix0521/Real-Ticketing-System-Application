@@ -16,29 +16,35 @@ public class Main
     static ArrayList<Vendor> vendors_array = new ArrayList<>();
     static ArrayList<Customer> customers_array = new ArrayList<>();
     static List<Ticket> ticket_pool_array = Collections.synchronizedList(new ArrayList<Ticket>());
+    public static final String RESET = "\u001B[0m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String RED = "\u001B[31m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.out.println("""
+        System.out.println(CYAN + """
         --------------------------------------------------------
         | ********** | REAL-TIME TICKETING SYSTEM | ********** |
         --------------------------------------------------------
-        """);
+        """ + RESET);
 
         String system_initiation_option = validation.Validate_SystemInitiationMenu();
 
         switch (system_initiation_option)
         {
             case "START":
-                System.out.println("\n\t   INITIATING SYSTEM...");
+                System.out.println(BLUE + "\n\t   INITIATING SYSTEM..." + RESET);
                 Thread.sleep(1000);
                 System.out.println("\n  Please setup configuration requirements.\n");
-                configuration.Initialize_Configuration_Settings();
-                configuration.Save_Configuration();
+//                configuration.Initialize_Configuration_Settings();
+//                configuration.Save_Configuration();
                 Configuration fetched_config_info = configuration.Read_Configuration();
                 configuration.Display_Loaded_Configuration();
                 ticket_pool = new TicketPool(fetched_config_info.getTotal_tickets(), fetched_config_info.getTicket_release_rate(), fetched_config_info.getCustomer_retrieval_rate(), fetched_config_info.getMax_ticket_capacity());
-                System.out.println("\t   ● System Successfully Initialized\n");
+                System.out.println(GREEN + "\t   ● System Successfully Initialized\n" + RESET);
 
 
                 int initialization_option = validation.Validate_OptionForInitializing_CustomersAndVendorDetails();
@@ -61,7 +67,7 @@ public class Main
                         break;
 
                     case 0:
-                        System.out.println("\t   EXITING SYSTEM...");
+                        System.out.println(BLUE + "\t   EXITING SYSTEM..." + RESET);
                         Thread.sleep(1000);
                         System.exit(0);
                         break;
@@ -71,7 +77,7 @@ public class Main
                 break;
 
             case "EXIT":
-                System.out.println("\n\t   EXITING SYSTEM....");
+                System.out.println(BLUE + "\n\t   EXITING SYSTEM...." + RESET);
                 System.exit(0);
                 break;
         }
@@ -94,7 +100,7 @@ public class Main
             String customer_id = " #C-" + i + ".";
             customers_array.add(new Customer(customer_name,customer_id));
         }
-        System.out.println("\n\t   ● Vendors : " + num_of_vendors + " & Customers : " + num_of_customers + " | Successfully added.\n");
+        System.out.println(GREEN + "\n\t   ● Vendors : " + num_of_vendors + " & Customers : " + num_of_customers + " | Successfully added.\n" + RESET);
 
     }
 
@@ -114,6 +120,6 @@ public class Main
             customer_thread = new Thread(customer);
             customer_thread.start();
         }
-
     }
+
 }

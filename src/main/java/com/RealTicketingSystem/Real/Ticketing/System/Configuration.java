@@ -35,11 +35,11 @@ public class Configuration
             writer.write(json);
             writer.close();
 
-            System.out.println("\n\t   ● Configuration Successfully Saved.\n");
+            System.out.println(Main.GREEN + "\n\t   ● Configuration Successfully Saved.\n" + Main.RESET);
         }
         catch (IOException e)
         {
-            System.out.println("\t ○ ERROR : Unable to save configuration.");
+            System.out.println(Main.RED + "\t ○ ERROR : Unable to save configuration." + Main.RESET);
             throw new RuntimeException(e);
         }
     }
@@ -52,7 +52,7 @@ public class Configuration
         {
             FileReader reader = new FileReader("Configuration.json");
 
-            System.out.println("\t   ● Configuration Successfully Loaded.\n");
+            System.out.println(Main.GREEN + "\t   ● Configuration Successfully Loaded.\n" + Main.RESET);
 
             Configuration loaded_configuration = Main.gson.fromJson(reader, Configuration.class);
 
@@ -65,7 +65,7 @@ public class Configuration
         }
         catch (IOException e)
         {
-            System.out.println("\t\t ○ ERROR : Unable to load configuration.\n");
+            System.out.println(Main.RED + "\t\t ○ ERROR : Unable to load configuration.\n" + Main.RESET);
             throw new RuntimeException(e);
         }
     }
