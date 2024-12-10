@@ -38,7 +38,7 @@ public class Configuration
             writer.write(json);
             writer.close();
 
-            System.out.println(ColorsUtil.GREEN + "\n\t   ● Configuration Successfully Saved.\n" + ColorsUtil.RESET);
+            System.out.println(ColorsUtil.GREEN + "\t   ● Configuration Successfully Saved.\n" + ColorsUtil.RESET);
         }
         catch (IOException e)
         {

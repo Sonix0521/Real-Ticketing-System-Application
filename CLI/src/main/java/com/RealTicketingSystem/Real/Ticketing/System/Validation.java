@@ -22,21 +22,45 @@ public class Validation
 
                 if (config_value > 0)
                 {
+                    if (configuration_statement.equalsIgnoreCase("\t ■ Enter total number of tickets : ") && config_value == 1)
+                    {
+                        System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Total tickets should be larger than 1." + ColorsUtil.RESET);
+                        Main.input.nextLine();
+                        continue;
+                    }
+                    if (configuration_statement.equalsIgnoreCase("\t ■ Enter maximum ticket capacity : ") && config_value < Main.configuration.getTotal_tickets() )
+                    {
+                        System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Total tickets should not exceed maximum ticket capacity." + ColorsUtil.RESET);
+                        Main.input.nextLine();
+                        continue;
+                    }
+                    if ( configuration_statement.equalsIgnoreCase("\t ■ Enter ticket release rate     : ") && config_value > Main.configuration.getTotal_tickets()/2 )
+                    {
+                        System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Vendor release rate must be at least 50% less than total tickets." + ColorsUtil.RESET);
+                        Main.input.nextLine();
+                        continue;
+                    }
+                    if ( configuration_statement.equalsIgnoreCase("\t ■ Enter customer retrieval rate : ") && config_value > Main.configuration.getTotal_tickets()/2 )
+                    {
+                        System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Customer retrieval rate must be at least 50% less than total tickets." + ColorsUtil.RESET);
+                        Main.input.nextLine();
+                        continue;
+                    }
                     return config_value;
                 }
                 else
                 {
-                    System.out.println("\n\t ○ Invalid Input. Please enter a positive value.\n");
+                    System.out.println(ColorsUtil.RED + "\t\t ○ INVALID INPUT : Please enter a positive value." + ColorsUtil.RESET);
                 }
             }
             else if (Main.input.hasNextDouble())
             {
-                System.out.println("\n\t ○ Invalid Input. Integer numerics are required.\n");
+                System.out.println(ColorsUtil.RED + "\t\t ○ INVALID INPUT : Integer numerics are required." + ColorsUtil.RESET);
                 Main.input.next();
             }
             else
             {
-                System.out.println("\n\t ○ Invalid Input. Please enter a numerical value.\n");
+                System.out.println(ColorsUtil.RED + "\t\t ○ INVALID INPUT : Please enter a numerical value." + ColorsUtil.RESET);
                 Main.input.next();
             }
         }
