@@ -44,7 +44,7 @@ public class Main
 
         ticket_pool = new TicketPool(fetched_config_info.getTotal_tickets(), fetched_config_info.getTicket_release_rate(), fetched_config_info.getCustomer_retrieval_rate(), fetched_config_info.getMax_ticket_capacity());
 
-        Initialize_Total_CustomersAndVendors(5, 10);
+        Initialize_Total_CustomersAndVendors(4, 10);
         StartThreads();
     }
 
