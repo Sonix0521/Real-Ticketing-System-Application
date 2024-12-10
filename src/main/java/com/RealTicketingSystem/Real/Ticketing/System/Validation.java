@@ -1,5 +1,7 @@
 package com.RealTicketingSystem.Real.Ticketing.System;
 
+import java.util.InputMismatchException;
+
 public class Validation
 {
 
@@ -40,47 +42,60 @@ public class Validation
         }
     }
 
-    public String Validate_name(String prompt_enter_name_statement)
+
+
+    protected int Validate_TotalNumOf_CustomersAndVendors(String prompt_statement, String user_type)
     {
-        while (true)
+        while(true)
         {
-            System.out.print(prompt_enter_name_statement);
-
-            String name = Main.input.nextLine();
-
-            if(name.matches("^[a-zA-Z ]+$"))
+            try
             {
-                return name;
+                System.out.print(prompt_statement);
+                int total_num_of_usertype = Main.input.nextInt();
+
+                if(total_num_of_usertype > 0)
+                {
+                    return total_num_of_usertype;
+                }
+                else
+                {
+                    System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Number of " + user_type + " should at least be 01." + ColorsUtil.RESET);
+                }
             }
-            else
+            catch (InputMismatchException InvalidInputError)
             {
-                System.out.println("\n\t ○ Invalid Input. Non-alphabetical characters aren't allowed for name.\n");
+                System.out.println(ColorsUtil.RED + "\t\t ○ ERROR : Please enter a numerical value." + ColorsUtil.RESET);
+                Main.input.nextLine();
             }
         }
     }
 
-    public String Validate_AddUser_Iteration(String prompt_iteration_statement)
+
+
+    protected String Validate_SystemInitiationMenuInputs()
     {
-        System.out.print(prompt_iteration_statement);
-
-        while(true)
+        while (true)
         {
-            System.out.print("\tEnter here : ");
+            System.out.println("""
+                  Welcome. Please Select an option to launch CLI
+                \t   ---------------------------
+                \t   | INITIATE SYSTEM = START |
+                \t   | EXIT SYSTEM     = EXIT  |
+                \t   ---------------------------""");
 
-            String continue_adding_vendor = Main.input.nextLine().toUpperCase();
+            System.out.print("  Enter selected option : ");
+            String system_initiation_option = Main.input.nextLine();
+            system_initiation_option = system_initiation_option.toUpperCase();
 
-            switch (continue_adding_vendor)
+            if (system_initiation_option.equalsIgnoreCase("START") || system_initiation_option.equalsIgnoreCase("EXIT"))
             {
-                case "N", "NO", "Y", "YES":
-                    return continue_adding_vendor;
-
-                default:
-                    System.out.println("\n\t ○ Invalid Input. Enter Y or N.\n");
-                    break;
+                return system_initiation_option;
             }
-
+            else
+            {
+                System.out.println(ColorsUtil.RED + "\n\t\t ○ INVALID OPTION : Enter 'START' or 'EXIT'\n" + ColorsUtil.RESET);
+            }
         }
-
     }
 
 

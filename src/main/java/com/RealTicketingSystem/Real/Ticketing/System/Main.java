@@ -12,31 +12,25 @@ public class Main
     static Scanner input = new Scanner(System.in);
     static Gson gson = new Gson();
     static Configuration configuration = new Configuration();
-    static Vendor vendor = new Vendor();
-    static Customer customer = new Customer();
     static TicketPool ticket_pool;
     static Validation validation = new Validation();
     static ArrayList<Vendor> vendors_array = new ArrayList<>();
     static ArrayList<Customer> customers_array = new ArrayList<>();
     static List<Ticket> ticket_pool_array = Collections.synchronizedList(new ArrayList<Ticket>());
-    public static final String RESET = "\u001B[0m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String RED = "\u001B[31m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
 
     public static void main(String[] args)
     {
 
-        System.out.println(CYAN + """
+        System.out.println(ColorsUtil.CYAN + """
         --------------------------------------------------------
         | ********** | REAL-TIME TICKETING SYSTEM | ********** |
         --------------------------------------------------------
-        """ + RESET);
+        """ + ColorsUtil.RESET);
 
-//        configuration.Initialize_Configuration_Parameters();
-//        configuration.Save_Configuration_Parameters();
+        System.out.println(ColorsUtil.BLUE + "\n\t   INITIATING SYSTEM...\n" + ColorsUtil.RESET);
+
+        configuration.Initialize_Configuration_Parameters();
+        configuration.Save_Configuration_Parameters();
 
         Configuration fetched_config_info = configuration.Read_Configuration_Parameters();
 
@@ -44,23 +38,16 @@ public class Main
 
         ticket_pool = new TicketPool(fetched_config_info.getTotal_tickets(), fetched_config_info.getTicket_release_rate(), fetched_config_info.getCustomer_retrieval_rate(), fetched_config_info.getMax_ticket_capacity());
 
-        Initialize_Total_CustomersAndVendors(5, 10);
-//        StartThreads();
+        System.out.println(ColorsUtil.GREEN + "\t   ● System Successfully Initialized\n" + ColorsUtil.RESET);
 
-        Thread vendor_thread;
-        Thread customer_thread;
+        System.out.println("  Initialize total vendors and customer.\n");
 
-        for (Vendor vendor : vendors_array)
-        {
-            vendor_thread = new Thread(vendor);
-            vendor_thread.start();
-        }
+        int num_of_vendors = validation.Validate_TotalNumOf_CustomersAndVendors("\t ■ Total number of vendors   : ","vendors");
+        int num_of_customers = validation.Validate_TotalNumOf_CustomersAndVendors("\t ■ Total number of customers : ","customers");
 
-        for (Customer customer : customers_array)
-        {
-            customer_thread = new Thread(customer);
-            customer_thread.start();
-        }
+        Initialize_Total_CustomersAndVendors(num_of_vendors, num_of_customers);
+        StartThreads();;
+
     }
 
 
@@ -80,28 +67,28 @@ public class Main
             String customer_id = " #C-" + i + ".";
             customers_array.add(new Customer(customer_name,customer_id));
         }
-        System.out.println(GREEN + "\n\t   ● Vendors : " + num_of_vendors + " & Customers : " + num_of_customers + " | Successfully added.\n" + RESET);
+        System.out.println(ColorsUtil.GREEN + "\n\t   ● Vendors : " + num_of_vendors + " & Customers : " + num_of_customers + " | Successfully added.\n" + ColorsUtil.RESET);
 
     }
 
 
 
-//    public static void StartThreads()
-//    {
-//        Thread vendor_thread;
-//        Thread customer_thread;
-//
-//        for (Vendor vendor : vendors_array)
-//        {
-//            vendor_thread = new Thread(vendor);
-//            vendor_thread.start();
-//        }
-//
-//        for (Customer customer : customers_array)
-//        {
-//            customer_thread = new Thread(customer);
-//            customer_thread.start();
-//        }
-//    }
+    public static void StartThreads()
+    {
+        Thread vendor_thread;
+        Thread customer_thread;
+
+        for (Vendor vendor : vendors_array)
+        {
+            vendor_thread = new Thread(vendor);
+            vendor_thread.start();
+        }
+
+        for (Customer customer : customers_array)
+        {
+            customer_thread = new Thread(customer);
+            customer_thread.start();
+        }
+    }
 
 }
