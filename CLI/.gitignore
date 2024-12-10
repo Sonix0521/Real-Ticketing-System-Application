@@ -18,7 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-
+Configuration.json
 
 ### NetBeans ###
 /nbproject/private/

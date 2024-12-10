@@ -1,1 +1,1 @@
-{"total_tickets":10,"ticket_release_rate":2,"customer_retrieval_rate":2,"max_ticket_capacity":100}
+{"total_tickets":10,"ticket_release_rate":1,"customer_retrieval_rate":1,"max_ticket_capacity":1}
