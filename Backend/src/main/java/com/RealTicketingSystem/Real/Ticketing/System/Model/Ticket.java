@@ -1,4 +1,4 @@
-package com.RealTicketingSystem.Real.Ticketing.System;
+package com.RealTicketingSystem.Real.Ticketing.System.Model;
 
 public class Ticket
 {

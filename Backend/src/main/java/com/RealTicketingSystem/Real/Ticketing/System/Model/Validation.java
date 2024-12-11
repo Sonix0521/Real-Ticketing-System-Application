@@ -1,4 +1,6 @@
-package com.RealTicketingSystem.Real.Ticketing.System;
+package com.RealTicketingSystem.Real.Ticketing.System.Model;
+
+import com.RealTicketingSystem.Real.Ticketing.System.Service.TicketPoolAppService;
 
 import java.util.InputMismatchException;
 
@@ -10,40 +12,40 @@ public class Validation
      * @param configuration_statement passed in the prompt statement for the related configuration setting for the user to enter.
      * @return config_values.
      */
-    protected int Validate_Configuration_Settings(String configuration_statement)
+    public int Validate_Configuration_Settings(String configuration_statement)
     {
         while (true)
         {
             System.out.print(configuration_statement);
 
-            if (Main.input.hasNextInt())
+            if (TicketPoolAppService.input.hasNextInt())
             {
-                int config_value = Main.input.nextInt();
+                int config_value = TicketPoolAppService.input.nextInt();
 
                 if (config_value > 0)
                 {
                     if (configuration_statement.equalsIgnoreCase("\t ■ Enter total number of tickets : ") && config_value == 1)
                     {
                         System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Total tickets should be larger than 1." + ColorsUtil.RESET);
-                        Main.input.nextLine();
+                        TicketPoolAppService.input.nextLine();
                         continue;
                     }
-                    if (configuration_statement.equalsIgnoreCase("\t ■ Enter maximum ticket capacity : ") && config_value < Main.configuration.getTotal_tickets() )
+                    if (configuration_statement.equalsIgnoreCase("\t ■ Enter maximum ticket capacity : ") && config_value < TicketPoolAppService.configuration.getTotal_tickets() )
                     {
                         System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Total tickets should not exceed maximum ticket capacity." + ColorsUtil.RESET);
-                        Main.input.nextLine();
+                        TicketPoolAppService.input.nextLine();
                         continue;
                     }
-                    if ( configuration_statement.equalsIgnoreCase("\t ■ Enter ticket release rate     : ") && config_value > Main.configuration.getTotal_tickets()/2 )
+                    if ( configuration_statement.equalsIgnoreCase("\t ■ Enter ticket release rate     : ") && config_value > TicketPoolAppService.configuration.getTotal_tickets()/2 )
                     {
                         System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Vendor release rate must be at least 50% less than total tickets." + ColorsUtil.RESET);
-                        Main.input.nextLine();
+                        TicketPoolAppService.input.nextLine();
                         continue;
                     }
-                    if ( configuration_statement.equalsIgnoreCase("\t ■ Enter customer retrieval rate : ") && config_value > Main.configuration.getTotal_tickets()/2 )
+                    if ( configuration_statement.equalsIgnoreCase("\t ■ Enter customer retrieval rate : ") && config_value > TicketPoolAppService.configuration.getTotal_tickets()/2 )
                     {
                         System.out.println(ColorsUtil.YELLOW + "\t\t ○ GUIDELINE : Customer retrieval rate must be at least 50% less than total tickets." + ColorsUtil.RESET);
-                        Main.input.nextLine();
+                        TicketPoolAppService.input.nextLine();
                         continue;
                     }
                     return config_value;
@@ -53,29 +55,29 @@ public class Validation
                     System.out.println(ColorsUtil.RED + "\t\t ○ INVALID INPUT : Please enter a positive value." + ColorsUtil.RESET);
                 }
             }
-            else if (Main.input.hasNextDouble())
+            else if (TicketPoolAppService.input.hasNextDouble())
             {
                 System.out.println(ColorsUtil.RED + "\t\t ○ INVALID INPUT : Integer numerics are required." + ColorsUtil.RESET);
-                Main.input.next();
+                TicketPoolAppService.input.next();
             }
             else
             {
                 System.out.println(ColorsUtil.RED + "\t\t ○ INVALID INPUT : Please enter a numerical value." + ColorsUtil.RESET);
-                Main.input.next();
+                TicketPoolAppService.input.next();
             }
         }
     }
 
 
 
-    protected int Validate_TotalNumOf_CustomersAndVendors(String prompt_statement, String user_type)
+    public int Validate_TotalNumOf_CustomersAndVendors(String prompt_statement, String user_type)
     {
         while(true)
         {
             try
             {
                 System.out.print(prompt_statement);
-                int total_num_of_usertype = Main.input.nextInt();
+                int total_num_of_usertype = TicketPoolAppService.input.nextInt();
 
                 if(total_num_of_usertype > 0)
                 {
@@ -89,7 +91,7 @@ public class Validation
             catch (InputMismatchException InvalidInputError)
             {
                 System.out.println(ColorsUtil.RED + "\t\t ○ ERROR : Please enter a numerical value." + ColorsUtil.RESET);
-                Main.input.nextLine();
+                TicketPoolAppService.input.nextLine();
             }
         }
     }

@@ -2,14 +2,14 @@ import { useState } from 'react';
 import './ConfigForm.css';
 import axios from 'axios';
 
-interface Formdetails {
-  totalTickets: number,
-  vendorRate: number,
-  customerRate: number,
-  maxCapacity: number
-}
+// interface FormDetails {
+//   totalTickets: number,
+//   vendorRate: number,
+//   customerRate: number,
+//   maxCapacity: number
+// }
 
-function Form() {
+function ConfigForm() {
   // State to hold form field values
   const [formValues, setFormValues] = useState({
     total_tickets: '',
@@ -19,10 +19,10 @@ function Form() {
   });
   
 
-  const FetchForm = async () => {
+  const FetchConfigForm = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/ticketpool",
+        "http://localhost:8080/API_EndPoints/Initialize_TicketPool",
         formValues
       );
       console.log(response.data);
@@ -254,9 +254,9 @@ function Form() {
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="form-button" onClick={(e)=>{e.preventDefault();FetchForm()}}>Submit</button>
+      <button type="submit" className="form-button" onClick={(e)=>{e.preventDefault();FetchConfigForm()}}>Submit</button>
     </form>
   );
 }
 
-export default Form;
+export default ConfigForm;

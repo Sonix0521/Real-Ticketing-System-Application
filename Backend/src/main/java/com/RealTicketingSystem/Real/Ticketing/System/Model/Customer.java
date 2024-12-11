@@ -1,6 +1,6 @@
-package com.RealTicketingSystem.Real.Ticketing.System;
+package com.RealTicketingSystem.Real.Ticketing.System.Model;
 
-import java.util.Objects;
+import com.RealTicketingSystem.Real.Ticketing.System.Service.TicketPoolAppService;
 
 public class Customer implements Runnable
 {
@@ -9,7 +9,11 @@ public class Customer implements Runnable
     private String customer_ID;
 
 
-
+    /**
+     *
+     * @param customer_name
+     * @param customer_ID
+     */
     public Customer(String customer_name, String customer_ID)
     {
         this.customer_name = customer_name;
@@ -21,11 +25,11 @@ public class Customer implements Runnable
     @Override
     public void run()
     {
-        while (!Main.ticket_pool.Check_If_AllTicketsSoldOut())
+        while (!TicketPoolAppService.ticket_pool.Check_If_AllTicketsSoldOut())
         {
             try
             {
-                Main.ticket_pool.Purchase_Ticket(this);
+                TicketPoolAppService.ticket_pool.Purchase_Ticket(this);
                 Thread.sleep(100);
             }
             catch (NullPointerException e)

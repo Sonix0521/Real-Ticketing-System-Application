@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './VendorCustomerForm.css';
+import axios from 'axios';
 
 function VendorCustomerForm() {
   // State to hold form field values
@@ -7,6 +8,19 @@ function VendorCustomerForm() {
     vendors: '',
     customers: '',
   });
+
+  const FetchVendorCustomerForm = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/API_EndPoints/Initialize_VendorAndCustomer",
+        formValues
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error occurred while posting form:", error);
+    }
+  };
+
 
   // State to hold error messages for form validation
   const [errorMessages, setErrorMessages] = useState<{ [key: string]: string }>({});
@@ -127,7 +141,7 @@ function VendorCustomerForm() {
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="form-button">Submit</button>
+      <button type="submit" className="form-button" onClick={(e)=>{e.preventDefault();FetchVendorCustomerForm()}}>Submit</button>
     </form>
   );
 }

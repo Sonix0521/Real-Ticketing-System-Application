@@ -1,6 +1,6 @@
-package com.RealTicketingSystem.Real.Ticketing.System;
+package com.RealTicketingSystem.Real.Ticketing.System.Model;
 
-import java.util.Objects;
+import com.RealTicketingSystem.Real.Ticketing.System.Service.TicketPoolAppService;
 
 public class Vendor implements Runnable
 {
@@ -21,11 +21,11 @@ public class Vendor implements Runnable
     @Override
     public void run()
     {
-        while (!Main.ticket_pool.Check_If_AllTicketsSoldOut())
+        while (!TicketPoolAppService.ticket_pool.Check_If_AllTicketsSoldOut())
         {
             try
             {
-                Main.ticket_pool.Add_Ticket(this);
+                TicketPoolAppService.ticket_pool.Add_Ticket(this);
                 Thread.sleep(2000);
             }
             catch (NullPointerException e)

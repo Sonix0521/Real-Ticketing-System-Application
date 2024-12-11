@@ -1,5 +1,5 @@
 import './App.css';
-import Form from './ConfigFormComponent/ConfigForm'; // Ensure the path is correct
+import ConfigForm from './ConfigFormComponent/ConfigForm'; // Ensure the path is correct
 import VendorCustomerForm from './VendorCustomerComponent/VendorCustomerForm';
 import TicketDisplayComponent from './TicketDisplayComponent/TicketDisplay'; // Import the TicketDisplayComponent
 import StartStopButtons from './StartStopBtnComponent/StartStopBtn'; // Import the StartStopButtons component
@@ -18,7 +18,7 @@ function App() {
       <div className="forms-container">
         {/* Configuration Form and Vendor/Customer Form */}
         <div className="form-section">
-          <Form />
+          <ConfigForm />
         </div>
         <div className="form-section">
           <VendorCustomerForm />

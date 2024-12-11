@@ -1,4 +1,7 @@
-package com.RealTicketingSystem.Real.Ticketing.System;
+package com.RealTicketingSystem.Real.Ticketing.System.Config;
+
+import com.RealTicketingSystem.Real.Ticketing.System.Model.ColorsUtil;
+import com.RealTicketingSystem.Real.Ticketing.System.Service.TicketPoolAppService;
 
 import java.io.*;
 
@@ -15,13 +18,13 @@ public class Configuration
 
     public void Initialize_Configuration_Parameters()
     {
-        total_tickets = Main.validation.Validate_Configuration_Settings("\t ■ Enter total number of tickets : ");
+        total_tickets = TicketPoolAppService.validation.Validate_Configuration_Settings("\t ■ Enter total number of tickets : ");
 
-        ticket_release_rate = Main.validation.Validate_Configuration_Settings("\t ■ Enter ticket release rate     : ");
+        ticket_release_rate = TicketPoolAppService.validation.Validate_Configuration_Settings("\t ■ Enter ticket release rate     : ");
 
-        customer_retrieval_rate = Main.validation.Validate_Configuration_Settings("\t ■ Enter customer retrieval rate : ");
+        customer_retrieval_rate = TicketPoolAppService.validation.Validate_Configuration_Settings("\t ■ Enter customer retrieval rate : ");
 
-        max_ticket_capacity = Main.validation.Validate_Configuration_Settings("\t ■ Enter maximum ticket capacity : ");
+        max_ticket_capacity = TicketPoolAppService.validation.Validate_Configuration_Settings("\t ■ Enter maximum ticket capacity : ");
 
         System.out.println();
     }
@@ -30,7 +33,7 @@ public class Configuration
 
     public void Save_Configuration_Parameters()
     {
-        String json = Main.gson.toJson(this);
+        String json = TicketPoolAppService.gson.toJson(this);
 
         try
         {
@@ -57,7 +60,7 @@ public class Configuration
 
             System.out.println(ColorsUtil.GREEN + "\t   ● Configuration Successfully Loaded.\n" + ColorsUtil.RESET);
 
-            Configuration loaded_configuration = Main.gson.fromJson(reader, Configuration.class);
+            Configuration loaded_configuration = TicketPoolAppService.gson.fromJson(reader, Configuration.class);
 
             this.total_tickets = loaded_configuration.getTotal_tickets();
             this.ticket_release_rate = loaded_configuration.getTicket_release_rate();
