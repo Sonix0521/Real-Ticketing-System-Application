@@ -1,12 +1,19 @@
 /* Center content horizontally and position the title at the top */
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 2rem 1rem; /* Add padding to create space around */
+  flex-wrap: wrap; /* Ensures responsiveness */
+  justify-content: space-between; /* Space between forms */
+  gap: 0.5rem; /* Adds gap between the two forms */
+  margin: 2rem;
+  align-items: flex-start;
+}
+
+.container h1 {
   text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+  width: 100%; /* Ensure it spans the full width */
 }
 
 h1 {

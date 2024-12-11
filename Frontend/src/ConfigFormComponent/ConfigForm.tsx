@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Form.css';
+import './ConfigForm.css';
 
 function Form() {
   // State to hold form field values
