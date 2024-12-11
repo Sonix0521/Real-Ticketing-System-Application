@@ -1,7 +1,7 @@
 import './App.css';
 import ConfigForm from './ConfigFormComponent/ConfigForm'; // Ensure the path is correct
 import VendorCustomerForm from './VendorCustomerComponent/VendorCustomerForm';
-import TicketDisplayComponent from './TicketDisplayComponent/TicketDisplay'; // Import the TicketDisplayComponent
+import TicketDisplayComponent from './DisplayAvailableTicketsComponent/DisplayAvailableTicketsComponent'; // Import the TicketDisplayComponent
 import StartStopButtons from './StartStopBtnComponent/StartStopBtn'; // Import the StartStopButtons component
 import LogDisplay from './LogDisplayComponent/LogDisplay';
 

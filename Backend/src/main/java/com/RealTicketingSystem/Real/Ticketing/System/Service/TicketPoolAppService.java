@@ -24,10 +24,7 @@ public class TicketPoolAppService
 
     public static void RunSimulation()
     {
-//        Initialize_Total_CustomersAndVendors(5, 10);
-//        StartThreads();
-//
-//        AvailableTickets();
+        StartThreads();
     }
 
 
