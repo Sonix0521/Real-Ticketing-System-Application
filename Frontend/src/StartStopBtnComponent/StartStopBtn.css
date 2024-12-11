@@ -1,0 +1,41 @@
+/* StartStopButtons.css */
+
+/* Container for the buttons */
+.start-stop-buttons {
+    display: flex;
+    justify-content: center;  /* Center the buttons horizontally */
+    gap: 1rem;  /* Space between the buttons */
+    margin-top: 2rem;  /* Space between Available Tickets and buttons */
+  }
+  
+  /* Button styling */
+  .start-button, .stop-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Start button specific style */
+  .start-button {
+    background-color: #28a745;  /* Green color */
+  }
+  
+  /* Stop button specific style */
+  .stop-button {
+    background-color: #dc3545;  /* Red color */
+  }
+  
+  /* Button hover effects */
+  .start-button:hover {
+    background-color: #218838;
+  }
+  
+  .stop-button:hover {
+    background-color: #c82333;
+  }
+  

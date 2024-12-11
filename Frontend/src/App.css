@@ -1,11 +1,9 @@
 /* Center content horizontally and position the title at the top */
 .container {
   display: flex;
-  flex-wrap: wrap; /* Ensures responsiveness */
-  justify-content: space-between; /* Space between forms */
-  gap: 0.5rem; /* Adds gap between the two forms */
+  flex-direction: column; /* Change this to column for stacking the forms and ticket section */
+  align-items: center;
   margin: 2rem;
-  align-items: flex-start;
 }
 
 .container h1 {
@@ -16,6 +14,34 @@
   width: 100%; /* Ensure it spans the full width */
 }
 
+/* Form container for ConfigForm and VendorCustomerForm */
+.forms-container {
+  display: flex;
+  justify-content: center; /* Center the forms horizontally */
+  gap: 2rem; /* Adds gap between the two forms */
+  margin-bottom: 2rem; /* Add space between forms and ticket display */
+  flex-wrap: wrap; /* Ensure responsiveness */
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the form within its section */
+  width: 100%;
+  max-width: 500px; /* Limit the width of the form sections */
+}
+
+/* Section for Ticket Display */
+.ticket-display-section {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Existing styles remain the same for h1 */
 h1 {
   font-size: 1rem;
   font-weight: 900;
