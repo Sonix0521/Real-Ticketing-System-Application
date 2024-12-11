@@ -1,14 +1,36 @@
 import { useState } from 'react';
 import './ConfigForm.css';
+import axios from 'axios';
+
+interface Formdetails {
+  totalTickets: number,
+  vendorRate: number,
+  customerRate: number,
+  maxCapacity: number
+}
 
 function Form() {
   // State to hold form field values
   const [formValues, setFormValues] = useState({
-    totalTickets: '',
-    vendorRate: '',
-    customerRate: '',
-    maxCapacity: ''
+    total_tickets: '',
+    ticket_release_rate: '',
+    customer_retrieval_rate: '',
+    max_ticket_capacity: ''
   });
+  
+
+  const FetchForm = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/ticketpool",
+        formValues
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error occurred while posting form:", error);
+    }
+  };
+
 
   // State to hold error messages for form validation
   const [errorMessages, setErrorMessages] = useState<{ [key: string]: string }>({});
@@ -113,10 +135,10 @@ function Form() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission
 
-    const totalTickets = parseInt(formValues.totalTickets); // Convert input value to number
-    const vendorRate = parseInt(formValues.vendorRate);
-    const customerRate = parseInt(formValues.customerRate);
-    const maxCapacity = parseInt(formValues.maxCapacity);
+    const totalTickets = parseInt(formValues.total_tickets); // Convert input value to number
+    const vendorRate = parseInt(formValues.ticket_release_rate);
+    const customerRate = parseInt(formValues.customer_retrieval_rate);
+    const maxCapacity = parseInt(formValues.max_ticket_capacity);
 
     let isValid = true; // Flag to track form validity
 
@@ -163,7 +185,7 @@ function Form() {
           id="totalTickets"
           placeholder="Enter total tickets"
           required
-          value={formValues.totalTickets}
+          value={formValues.total_tickets}
           onChange={(e) => handleChange(e, 'totalTickets')}
           onKeyPress={(e) => handleKeyPress(e, 'totalTickets')}
           onFocus={() => handleFocus('totalTickets')}
@@ -182,7 +204,7 @@ function Form() {
           id="vendorRate"
           placeholder="Enter vendor release rate"
           required
-          value={formValues.vendorRate}
+          value={formValues.ticket_release_rate}
           onChange={(e) => handleChange(e, 'vendorRate')}
           onKeyPress={(e) => handleKeyPress(e, 'vendorRate')}
           onFocus={() => handleFocus('vendorRate')}
@@ -201,7 +223,7 @@ function Form() {
           id="customerRate"
           placeholder="Enter customer retrieval rate"
           required
-          value={formValues.customerRate}
+          value={formValues.customer_retrieval_rate}
           onChange={(e) => handleChange(e, 'customerRate')}
           onKeyPress={(e) => handleKeyPress(e, 'customerRate')}
           onFocus={() => handleFocus('customerRate')}
@@ -220,7 +242,7 @@ function Form() {
           id="maxCapacity"
           placeholder="Enter max ticket capacity"
           required
-          value={formValues.maxCapacity}
+          value={formValues.max_ticket_capacity}
           onChange={(e) => handleChange(e, 'maxCapacity')}
           onKeyPress={(e) => handleKeyPress(e, 'maxCapacity')}
           onFocus={() => handleFocus('maxCapacity')}
@@ -232,7 +254,7 @@ function Form() {
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="form-button">Submit</button>
+      <button type="submit" className="form-button" onClick={(e)=>{e.preventDefault();FetchForm()}}>Submit</button>
     </form>
   );
 }

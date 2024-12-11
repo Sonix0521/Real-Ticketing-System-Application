@@ -16,7 +16,7 @@ public class Main
     static Validation validation = new Validation();
     static ArrayList<Vendor> vendors_array = new ArrayList<>();
     static ArrayList<Customer> customers_array = new ArrayList<>();
-    static List<Ticket> ticket_pool_array = Collections.synchronizedList(new ArrayList<Ticket>());
+    public static List<Ticket> ticket_pool_array = Collections.synchronizedList(new ArrayList<Ticket>());
 
     public static void main(String[] args)
     {
