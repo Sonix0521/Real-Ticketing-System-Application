@@ -10,7 +10,6 @@ function Form() {
     customer_retrieval_rate: '',
     max_ticket_capacity: ''
   });
-  
 
   const FetchConfigForm = async () => {
     try {
@@ -65,41 +64,6 @@ function Form() {
       return "Max capacity must be greater than total tickets."; // Validation error
     }
     return ""; // Return empty string if valid
-  };
-
-  /**
-   * Handles key press for input fields to block invalid input (non-numeric)
-   */
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>, fieldName: string) => {
-    const key = e.key;
-    const regex = /^[0-9]$/; // Regex to allow only numeric characters
-    if (!regex.test(key)) {
-      e.preventDefault(); // Block invalid input
-      setErrorMessages((prev) => ({
-        ...prev,
-        [fieldName]: 'Only numerical values are allowed.', // Set error message
-      }));
-    }
-  };
-
-  /**
-   * Clears the error message when input field is focused
-   */
-  const handleFocus = (fieldName: string) => {
-    setErrorMessages((prev) => ({
-      ...prev,
-      [fieldName]: '', // Clear error on focus
-    }));
-  };
-
-  /**
-   * Clears error messages when focus is lost from an input field
-   */
-  const handleBlur = (fieldName: string) => {
-    setErrorMessages((prev) => ({
-      ...prev,
-      [fieldName]: '', // Clear error on blur
-    }));
   };
 
   /**
@@ -162,13 +126,14 @@ function Form() {
     // If all fields are valid, proceed with form submission
     if (isValid) {
       alert("Form is valid and ready for submission!"); // Placeholder for form submission logic
+      FetchConfigForm(); // Send data to backend if valid
     }
   };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
       <div className="form-title">Configuration Settings</div>
-      
+
       {/* Total Tickets Input Field */}
       <div className="form-group">
         <label htmlFor="totalTickets">Total Tickets</label>
@@ -178,13 +143,10 @@ function Form() {
           placeholder="Enter total tickets"
           required
           value={formValues.total_tickets}
-          onChange={(e) => handleChange(e, 'totalTickets')}
-          onKeyPress={(e) => handleKeyPress(e, 'totalTickets')}
-          onFocus={() => handleFocus('totalTickets')}
-          onBlur={() => handleBlur('totalTickets')}
+          onChange={(e) => handleChange(e, 'total_tickets')} // Ensure the correct field name is used
         />
-        {errorMessages['totalTickets'] && (
-          <p className="error-message">{errorMessages['totalTickets']}</p>
+        {errorMessages['total_tickets'] && (
+          <p className="error-message">{errorMessages['total_tickets']}</p>
         )}
       </div>
 
@@ -197,13 +159,10 @@ function Form() {
           placeholder="Enter vendor release rate"
           required
           value={formValues.ticket_release_rate}
-          onChange={(e) => handleChange(e, 'vendorRate')}
-          onKeyPress={(e) => handleKeyPress(e, 'vendorRate')}
-          onFocus={() => handleFocus('vendorRate')}
-          onBlur={() => handleBlur('vendorRate')}
+          onChange={(e) => handleChange(e, 'ticket_release_rate')}
         />
-        {errorMessages['vendorRate'] && (
-          <p className="error-message">{errorMessages['vendorRate']}</p>
+        {errorMessages['ticket_release_rate'] && (
+          <p className="error-message">{errorMessages['ticket_release_rate']}</p>
         )}
       </div>
 
@@ -216,13 +175,10 @@ function Form() {
           placeholder="Enter customer retrieval rate"
           required
           value={formValues.customer_retrieval_rate}
-          onChange={(e) => handleChange(e, 'customerRate')}
-          onKeyPress={(e) => handleKeyPress(e, 'customerRate')}
-          onFocus={() => handleFocus('customerRate')}
-          onBlur={() => handleBlur('customerRate')}
+          onChange={(e) => handleChange(e, 'customer_retrieval_rate')}
         />
-        {errorMessages['customerRate'] && (
-          <p className="error-message">{errorMessages['customerRate']}</p>
+        {errorMessages['customer_retrieval_rate'] && (
+          <p className="error-message">{errorMessages['customer_retrieval_rate']}</p>
         )}
       </div>
 
@@ -235,18 +191,15 @@ function Form() {
           placeholder="Enter max ticket capacity"
           required
           value={formValues.max_ticket_capacity}
-          onChange={(e) => handleChange(e, 'maxCapacity')}
-          onKeyPress={(e) => handleKeyPress(e, 'maxCapacity')}
-          onFocus={() => handleFocus('maxCapacity')}
-          onBlur={() => handleBlur('maxCapacity')}
+          onChange={(e) => handleChange(e, 'max_ticket_capacity')}
         />
-        {errorMessages['maxCapacity'] && (
-          <p className="error-message">{errorMessages['maxCapacity']}</p>
+        {errorMessages['max_ticket_capacity'] && (
+          <p className="error-message">{errorMessages['max_ticket_capacity']}</p>
         )}
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="form-button" onClick={(e)=>{e.preventDefault();FetchConfigForm()}}>Submit</button>
+      <button type="submit" className="form-button">Submit</button>
     </form>
   );
 }
