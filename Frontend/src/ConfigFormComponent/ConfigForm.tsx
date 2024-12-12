@@ -2,14 +2,7 @@ import { useState } from 'react';
 import './ConfigForm.css';
 import axios from 'axios';
 
-// interface FormDetails {
-//   totalTickets: number,
-//   vendorRate: number,
-//   customerRate: number,
-//   maxCapacity: number
-// }
-
-function ConfigForm() {
+function Form() {
   // State to hold form field values
   const [formValues, setFormValues] = useState({
     total_tickets: '',
@@ -30,7 +23,6 @@ function ConfigForm() {
       console.error("Error occurred while posting form:", error);
     }
   };
-
 
   // State to hold error messages for form validation
   const [errorMessages, setErrorMessages] = useState<{ [key: string]: string }>({});
@@ -259,4 +251,4 @@ function ConfigForm() {
   );
 }
 
-export default ConfigForm;
+export default Form;

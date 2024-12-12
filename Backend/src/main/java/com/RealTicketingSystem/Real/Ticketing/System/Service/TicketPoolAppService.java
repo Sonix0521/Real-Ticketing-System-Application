@@ -17,6 +17,7 @@ public class TicketPoolAppService
     public static Gson gson = new Gson();
     public static Configuration configuration = new Configuration();
     public static TicketPool ticket_pool;
+    public static VendorCustomerRequest vendor_Customer_request;
     public static Validation validation = new Validation();
     static ArrayList<Vendor> vendors_array = new ArrayList<>();
     static ArrayList<Customer> customers_array = new ArrayList<>();
@@ -24,7 +25,8 @@ public class TicketPoolAppService
 
     public static void RunSimulation()
     {
-        StartThreads();
+        System.out.println("HEllO");
+//        StartThreads();
     }
 
 
@@ -68,11 +70,20 @@ public class TicketPoolAppService
         }
     }
 
-    public static void Initialize_TicketPool(TicketPool configuration_parameters)
-    {
-        ticket_pool = configuration_parameters ;
+    public static void Initialize_TicketPool(TicketPool configuration_parameters) {
+        // Create a new TicketPool using the values from the input object
+        System.out.println(configuration_parameters.toString());
+        ticket_pool = configuration_parameters;
+        configuration.Save_Configuration_Parameters();
         System.out.println(ticket_pool);
     }
+
+    public static void Initialize_CustomersAndVendors(VendorCustomerRequest num_of_vendors_and_customers)
+    {
+        vendor_Customer_request = num_of_vendors_and_customers;
+        System.out.println(vendor_Customer_request);
+    }
+
 
     public static int AvailableTickets()
     {

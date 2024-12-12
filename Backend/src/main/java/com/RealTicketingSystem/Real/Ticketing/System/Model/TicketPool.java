@@ -97,4 +97,21 @@ public class TicketPool
                 " }";
     }
 
+
+    public int getTotal_tickets()
+    {
+        return total_tickets;
+    }
+    public int getTicket_release_rate()
+    {
+        return ticket_release_rate;
+    }
+    public int getCustomer_retrieval_rate()
+    {
+        return customer_retrieval_rate;
+    }
+    public int getMax_ticket_capacity()
+    {
+        return max_ticket_capacity;
+    }
 }
